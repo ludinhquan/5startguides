@@ -1,0 +1,32 @@
+.sideItem {
+  &:hover {
+    background: #f5f5f5;
+    cursor: pointer;
+    color: #000000;
+  }
+  color: #000000;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  border-radius: 8px;
+  padding: 0 16px;
+
+  .text {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    .badge {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+    }
+  }
+}

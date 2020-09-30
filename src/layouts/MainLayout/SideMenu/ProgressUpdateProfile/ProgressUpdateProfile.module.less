@@ -1,0 +1,29 @@
+.container {
+  margin-bottom: 40px;
+  .helloText {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .avatar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .button,
+    .progress {
+      position: absolute;
+    }
+
+    .button {
+      &,
+      &:hover {
+        color: #000000;
+        border: none;
+      }
+      bottom: -5px;
+      right: -10px;
+    }
+  }
+}
