@@ -1,1 +1,1 @@
-export { default } from "./Profile";
+export { default, FIELDS } from "./Profile";

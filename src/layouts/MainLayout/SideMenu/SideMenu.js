@@ -36,7 +36,7 @@ const SideMenu = () => {
           text: "Đăng xuất",
         },
       ].map((prop) => (
-        <SideMenuItem {...prop} />
+        <SideMenuItem key={prop.text} {...prop} />
       ))}
       <div className={styles.title}>Quản lí Tour</div>
       {[
@@ -50,7 +50,7 @@ const SideMenu = () => {
           badge: { count: 4, type: "secondary" },
         },
       ].map((prop) => (
-        <SideMenuItem {...prop} />
+        <SideMenuItem key={prop.text} {...prop} />
       ))}
       <div className={styles.title}>Quản lí bài viết</div>
       {[
@@ -64,7 +64,7 @@ const SideMenu = () => {
           badge: { count: 4, type: "secondary" },
         },
       ].map((prop) => (
-        <SideMenuItem {...prop} />
+        <SideMenuItem key={prop.text} {...prop} />
       ))}
     </div>
   );

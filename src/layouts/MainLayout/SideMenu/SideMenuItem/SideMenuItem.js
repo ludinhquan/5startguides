@@ -1,27 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import styles from "./SideMenuItem.module.less";
 
-const badgeStyle = {
-  default: { backgroundColor: "#FF79A9", color: "#ffffff" },
-  secondary: { backgroundColor: "#eeeeee", color: "#9B9B9B" },
+const customStyles = {
+  badgeStyle: {
+    default: { backgroundColor: "#FF79A9", color: "#ffffff" },
+    secondary: { backgroundColor: "#eeeeee", color: "#9B9B9B" },
+  },
+  borderStyles: { borderBottom: "1px solid #eeeeee" },
+  active: { background: "#f5f5f5" },
 };
-const borderStyles = { borderBottom: "1px solid #eeeeee" };
 
 const SideMenuItem = ({ to, icon, text, badge, border }) => {
+  const location = useLocation();
+  const { pathname } = location;
+  const isActive = pathname === to;
   return (
-    <Link className={styles.sideItem} to={to}>
+    <Link
+      to={to}
+      className={styles.sideItem}
+      style={isActive ? customStyles.active : null}
+    >
       {icon}
-      <div className={styles.text} style={border ? borderStyles : null}>
+      <div
+        className={styles.text}
+        style={border ? customStyles.borderStyles : null}
+      >
         <span>{text}</span>
         {badge && (
           <span
             className={styles.badge}
-            style={badgeStyle[badge?.type || "default"]}
+            style={customStyles.badgeStyle[badge.type || "default"]}
           >
-            {badge?.count}
+            {badge.count}
           </span>
         )}
       </div>
@@ -32,8 +45,13 @@ const SideMenuItem = ({ to, icon, text, badge, border }) => {
 export default SideMenuItem;
 SideMenuItem.propTypes = {
   border: PropTypes.bool,
+  to: PropTypes.string,
+  icon: PropTypes.element,
+  text: PropTypes.string,
+  badge: PropTypes.object,
 };
 
 SideMenuItem.defaultProps = {
+  to: "",
   border: true,
 };

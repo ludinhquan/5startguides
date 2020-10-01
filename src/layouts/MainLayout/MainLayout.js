@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
-import { Col, Layout, Row, Spin } from "antd";
+import { Layout, Spin } from "antd";
 
 import Header from "./Header";
+import SideMenu from "./SideMenu";
 
 import styles from "./MainLayout.module.less";
-import SideMenu from "./SideMenu/SideMenu";
 
 const { Content, Sider } = Layout;
 
@@ -22,7 +22,7 @@ const MainLayout = ({ children }) => {
         <Sider width={368} className={styles.sider}>
           <SideMenu />
         </Sider>
-        <Content>
+        <Content className={styles.content}>
           <Suspense fallback={<Loading />}>{children}</Suspense>
         </Content>
       </Layout>
