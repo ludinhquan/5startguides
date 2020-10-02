@@ -35,7 +35,7 @@ const TourCard = (props) => {
   return (
     <Card
       className={styles.card}
-      cover={<img src={images?.[0] || imageDefault} alt="" />}
+      cover={<img src={images?.[0]?.url || imageDefault} alt="" />}
       actions={[
         <Link to={`/edit-tour/${id}`} className={styles.edit}>
           <Space>
@@ -60,7 +60,9 @@ const TourCard = (props) => {
         title={
           <Row justify="space-between">
             <Col className={styles.name}>Maria</Col>
-            <Col className={styles.time}>{moment(new Date(createdAt)).fromNow()}</Col>
+            <Col className={styles.time}>
+              {moment(new Date(createdAt)).fromNow()}
+            </Col>
           </Row>
         }
       />

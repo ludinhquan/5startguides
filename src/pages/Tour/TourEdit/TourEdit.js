@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -11,7 +11,7 @@ import styles from "./TourEdit.module.less";
 const TourEdit = () => {
   const params = useParams();
   const history = useHistory();
-  const formRef = createRef();
+  const formRef = useRef();
   const dispatch = useDispatch();
 
   const tourId = params.id;
@@ -23,9 +23,15 @@ const TourEdit = () => {
   }, [dispatch, tourId]);
 
   useEffect(() => {
-    formRef.current.setFieldsValue({ name: tourDetail.name, tourType: "" });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tourDetail]);
+    formRef.current.setFieldsValue({
+      name: tourDetail.name,
+      tourType: tourDetail.tourType,
+      activities: tourDetail.activities,
+      rangeFee: tourDetail.rangeFee,
+      images: tourDetail.images,
+      description: tourDetail.description,
+    });
+  }, [tourDetail, formRef]);
 
   const onSubmit = (values) => {
     setIsLoading((pre) => !pre);

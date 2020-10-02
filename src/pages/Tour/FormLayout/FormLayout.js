@@ -18,7 +18,6 @@ export const FIELDS = {
   RANGE_FEE: "rangeFee",
   IMAGES: "images",
   DESCRIPTION: "description",
-  JOURNEY_OF_EXPERIENCE: "journeyOfExperience",
   ACTIVITIES_DETAIL: "activitiesDetail",
 };
 
@@ -68,7 +67,6 @@ const FormLayout = (props, ref) => {
         onFinish={onSubmit}
         onValuesChange={onValuesChange}
         autoComplete="off"
-        initialValues={{ [FIELDS.RANGE_FEE]: [10, 30] }}
       >
         <Form.Item
           required={false}

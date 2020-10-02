@@ -11,7 +11,11 @@ const fakeDataList = [
     id: 1,
     name: "Chocol’ART tại Úc – tạo ra tác phẩm nghệ thuật ngọt ngào",
     images: [
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+      {
+        uid: 1,
+        url:
+          "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+      },
     ],
     rangeFee: [20, 30],
     createdAt: "2020/09/29",
@@ -20,7 +24,11 @@ const fakeDataList = [
     id: 2,
     name: "Tập Muay Thái cùng Trí trên sân thượng tươi mát đầy cây xanh",
     images: [
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+      {
+        uid: 1,
+        url:
+          "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+      },
     ],
     rangeFee: [25, 35],
     createdAt: "2020/10/2 13:00:00",
@@ -29,7 +37,11 @@ const fakeDataList = [
     id: 3,
     name: "Thưởng thức xì gà, hút xì gà đúng điệu, lắng đọng và trò chuyện",
     images: [
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+      {
+        uid: 1,
+        url:
+          "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+      },
     ],
     rangeFee: [3, 10],
     createdAt: "2020/10/2 13:00:00",
@@ -38,7 +50,11 @@ const fakeDataList = [
     id: 4,
     name: "Tìm hiểu về nghệ thuật Vẽ",
     images: [
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+      {
+        uid: 1,
+        url:
+          "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+      },
     ],
     rangeFee: [25, 35],
     createdAt: "2020/10/2 13:00:00",
@@ -64,12 +80,11 @@ const userSlice = createSlice({
     },
     updateTour(state, action) {
       const { tourId, values } = action.payload;
-      state.tourList = [...state.tourList].map((tour) => {
-        if (tour.id === Number(tourId)) {
-          return { ...tour, ...values };
-        }
-        return tour;
-      });
+      const newTour = { ...state.tourDetail, ...values };
+      state.tourDetail = newTour;
+      state.tourList = [...state.tourList].map((tour) =>
+        tour.id === Number(tourId) ? newTour : tour
+      );
     },
     deleteTour(state, action) {
       const tourId = action.payload;

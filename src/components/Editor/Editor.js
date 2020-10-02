@@ -5,12 +5,12 @@ import { Editor as EditorTiny } from "@tinymce/tinymce-react";
 import "./Editor.module.less";
 
 const Editor = (props) => {
-  const { initialValue, onChange } = props;
+  const { value, onChange } = props;
 
   return (
     <EditorTiny
-      initialValue={initialValue}
-      onEditorChange={content => onChange(content)}
+      value={value || ""}
+      onEditorChange={(content) => onChange(content)}
       init={{
         height: 190,
         menubar: false,

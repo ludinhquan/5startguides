@@ -14,8 +14,8 @@ const RangeFee = (props) => {
           step={1}
           max={50}
           tooltipVisible
-          defaultValue={value || [10, 30]}
-          onAfterChange={(range) => onUpdateForm(range)}
+          value={value}
+          onChange={(range) => onUpdateForm(range)}
           tipFormatter={(value) => `$${value}`}
           getTooltipPopupContainer={(trigger) => trigger.parentNode}
           marks={{
@@ -30,6 +30,10 @@ const RangeFee = (props) => {
 
 RangeFee.propTypes = {
   onChange: PropTypes.func,
+  value: PropTypes.array,
+};
+RangeFee.defaultProps = {
+  value: [0, 50],
 };
 
 export default RangeFee;

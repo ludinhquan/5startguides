@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
@@ -11,34 +11,44 @@ const customStyles = {
 };
 
 const Images = (props) => {
-  const { onChange: onUpdateForm } = props;
+  const { value, onChange: onUpdateForm } = props;
 
   const [fileList, setFileList] = useState([]);
   const [previewImage, setPreviewImage] = useState({});
 
+  useEffect(() => {
+    if (Array.isArray(value)) setFileList(value);
+  }, [value]);
+
   const handleChange = async ({ fileList }) => {
     const getImagesUrl = async (list) => {
-      const promies = list.map((file) => getBase64(file.originFileObj));
-      return Promise.all(promies);
+      const promies = list.map((file) =>
+        file?.url ? Promise.resolve(file.url) : getBase64(file.originFileObj)
+      );
+      const data = await Promise.all(promies);
+      return list.map((image, idx) => ({
+        uid: image.uid,
+        name: image.name,
+        url: data[idx],
+      }));
     };
 
     const images = await getImagesUrl(fileList);
     onUpdateForm(images);
-    setFileList({ fileList });
+  };
+
+  const handleRemove = (file) => {
+    onUpdateForm(fileList.filter((item) => item.uid !== file.uid));
   };
 
   const handleCancel = () =>
     setPreviewImage((pre) => ({ ...pre, visible: false }));
 
   const handlePreview = async (file) => {
-    if (!file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-
     setPreviewImage({
-      image: file.preview,
+      image: file.url,
       visible: true,
-      title: file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
+      title: file.name,
     });
   };
 
@@ -53,9 +63,11 @@ const Images = (props) => {
       <Upload
         multiple
         beforeUpload={() => false}
+        onRemove={handleRemove}
         onChange={handleChange}
         onPreview={handlePreview}
         listType="picture-card"
+        fileList={fileList}
       >
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>
@@ -75,10 +87,11 @@ const Images = (props) => {
 
 Images.propTypes = {
   onChange: PropTypes.func,
+  value: PropTypes.array,
 };
 
 Images.defaultProps = {
-  onChange: () => {},
+  value: [],
 };
 
 export default Images;
