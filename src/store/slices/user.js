@@ -1,7 +1,10 @@
-import { updateProfileApi } from "@/api/user";
 import { createSlice } from "@reduxjs/toolkit";
 
+import { updateProfileApi } from "@/api/user";
+import image from "@/assets/images/Image.png";
+
 const initialProfile = {
+  avatar: image,
   userName: "",
   firstName: "Glover",
   lastName: "Maria",

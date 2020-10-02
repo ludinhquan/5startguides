@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Route, useHistory } from "react-router-dom";
+import React, { useImperativeHandle, useState } from "react";
+import PropTypes from "prop-types";
 import { Input, Form, Radio, Checkbox, Button } from "antd";
 
 import Editor from "@/components/Editor";
 import { getRequiredRule } from "@/utils/formRules";
-import { createTourRequest } from "@/store/slices/tour";
 
 import Images from "./Images";
 import RangeFee from "./RangeFee";
@@ -42,11 +40,10 @@ const tourTypeOptions = [
 
 const MIN_IMAGES = 7;
 
-const FormLayout = (props) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+const FormLayout = (props, ref) => {
+  const { onSubmit, isLoading } = props;
   const [form] = Form.useForm();
-  const [isLoading, setIsLoading] = useState(false);
+
   const [quantityImages, setQuantityImages] = useState(0);
 
   const onValuesChange = (changedValues) => {
@@ -55,29 +52,23 @@ const FormLayout = (props) => {
     }
   };
 
-  const onSubmit = (values) => {
-    setIsLoading(true);
-    dispatch(createTourRequest(values))
-      .then(() => {
-        history.push("/tours");
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
+  const setFieldsValue = (fieldsValue) => {
+    form.setFieldsValue(fieldsValue);
   };
+
+  useImperativeHandle(ref, () => ({
+    setFieldsValue,
+  }));
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Thêm Tour</div>
       <Form
         form={form}
         layout="vertical"
         onFinish={onSubmit}
         onValuesChange={onValuesChange}
         autoComplete="off"
-        initialValues={{
-          [FIELDS.ACTIVITIES_DETAIL]: [],
-        }}
+        initialValues={{ [FIELDS.RANGE_FEE]: [10, 30] }}
       >
         <Form.Item
           required={false}
@@ -142,6 +133,8 @@ const FormLayout = (props) => {
   );
 };
 
-FormLayout.propTypes = {};
+export default React.forwardRef(FormLayout);
 
-export default FormLayout;
+FormLayout.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

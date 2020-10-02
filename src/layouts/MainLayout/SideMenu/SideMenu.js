@@ -49,6 +49,7 @@ const SideMenu = () => {
           icon: <img src={lockIcon} alt="" />,
           text: "Quản lí Tour",
           badge: { count: 4, type: "secondary" },
+          to: "/tours"
         },
       ].map((prop) => (
         <SideMenuItem key={prop.text} {...prop} />

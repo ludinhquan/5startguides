@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Col, Form, Input, Row } from "antd";
 import { FIELDS } from "@/pages/Profile";
 import { getRequiredRule } from "@/utils/formRules";

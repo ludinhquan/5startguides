@@ -14,7 +14,7 @@ const RangeFee = (props) => {
           step={1}
           max={50}
           tooltipVisible
-          value={value || [10, 30]}
+          defaultValue={value || [10, 30]}
           onAfterChange={(range) => onUpdateForm(range)}
           tipFormatter={(value) => `$${value}`}
           getTooltipPopupContainer={(trigger) => trigger.parentNode}

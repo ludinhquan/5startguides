@@ -16,8 +16,14 @@ const Images = (props) => {
   const [fileList, setFileList] = useState([]);
   const [previewImage, setPreviewImage] = useState({});
 
-  const handleChange = ({ fileList }) => {
-    onUpdateForm(fileList);
+  const handleChange = async ({ fileList }) => {
+    const getImagesUrl = async (list) => {
+      const promies = list.map((file) => getBase64(file.originFileObj));
+      return Promise.all(promies);
+    };
+
+    const images = await getImagesUrl(fileList);
+    onUpdateForm(images);
     setFileList({ fileList });
   };
 

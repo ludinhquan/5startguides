@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { CameraOutlined } from "@ant-design/icons";
 import { Avatar, Button, Col, Progress, Row } from "antd";
 
-import image from "@/assets/images/Image.png";
 import { profileSelector } from "@/store/selectors/user";
 
 import styles from "./ProgressUpdateProfile.module.less";
@@ -23,7 +22,7 @@ function ProgressUpdateProfile() {
               strokeColor="#2ECC71"
               className={styles.progress}
             />
-            <Avatar size={75} src={image} />
+            <Avatar size={75} src={profile?.avatar} />
             <Button
               className={styles.button}
               shape="circle"
