@@ -1,17 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Button, Col, Progress, Row } from "antd";
-import Avatar from "antd/lib/avatar/avatar";
+import { useSelector } from "react-redux";
+import { CameraOutlined } from "@ant-design/icons";
+import { Avatar, Button, Col, Progress, Row } from "antd";
 
 import image from "@/assets/images/Image.png";
-import styles from "./ProgressUpdateProfile.module.less";
-import { CameraOutlined } from "@ant-design/icons";
+import { profileSelector } from "@/store/selectors/user";
 
-function ProgressUpdateProfile(props) {
+import styles from "./ProgressUpdateProfile.module.less";
+
+function ProgressUpdateProfile() {
+  const profile = useSelector(profileSelector);
   return (
     <div className={styles.container}>
       <Row gutter={24}>
-        <Col>
+        <Col span={7}>
           <div className={styles.avatar}>
             <Progress
               width={85}
@@ -29,8 +31,8 @@ function ProgressUpdateProfile(props) {
             />
           </div>
         </Col>
-        <Col>
-          <div className={styles.helloText}>Xin chào, Maria</div>
+        <Col span={17}>
+          <div className={styles.helloText}>Xin chào, {profile?.lastName}</div>
           <div>
             Bạn đã hoàn thành <b>75%</b> hồ sơ,
           </div>

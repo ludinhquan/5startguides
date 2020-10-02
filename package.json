@@ -6,6 +6,7 @@
     "@ant-design/icons": "^4.2.2",
     "@craco/craco": "^5.7.0",
     "@reduxjs/toolkit": "^1.4.0",
+    "@tinymce/tinymce-react": "^3.7.0",
     "antd": "^4.6.6",
     "craco-less-plugin": "0.0.3",
     "moment": "^2.29.0",

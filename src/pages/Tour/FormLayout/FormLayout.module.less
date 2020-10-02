@@ -1,0 +1,52 @@
+.container {
+  .title {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 38px;
+    margin-bottom: 32px;
+  }
+  .radioGroup,
+  .checkboxGroup {
+    display: flex;
+    flex-wrap: wrap;
+    > label {
+      margin-bottom: 10px;
+      flex-basis: 50%;
+      margin-right: 0 !important;
+    }
+  }
+  .fee {
+    margin-bottom: 0;
+  }
+  :global(.ant-slider) {
+    :global(.ant-tooltip-arrow) {
+      display: none;
+    }
+    :global(.ant-tooltip) {
+      padding-bottom: 0;
+    }
+    :global(.ant-tooltip-inner) {
+      background-color: unset;
+      box-shadow: unset;
+      color: #000000;
+      font-weight: 600;
+    }
+  }
+  :global(.ant-slider-mark) {
+    top: -25px;
+    > span {
+      font-weight: 600;
+      font-size: 14px;
+      color: #bfbfbf;
+      white-space: nowrap;
+    }
+  }
+  :global(.ant-form-item-label) {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .btnSave {
+    margin-top: 40px;
+  }
+}

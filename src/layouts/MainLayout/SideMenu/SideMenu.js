@@ -43,6 +43,7 @@ const SideMenu = () => {
         {
           icon: <img src={editUserIcon} alt="" />,
           text: "Thêm Tour",
+          to: "/create-tour",
         },
         {
           icon: <img src={lockIcon} alt="" />,
