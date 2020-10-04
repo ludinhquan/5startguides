@@ -15,7 +15,7 @@ const TourManagement = (props) => {
       <div className={styles.title}>Quản lí Tour</div>
       <Row gutter={32}>
         {tours.map((tour) => (
-          <Col key={tour.id} span={12}>
+          <Col key={tour.id} md={12}>
             <TourCard {...tour} />
           </Col>
         ))}

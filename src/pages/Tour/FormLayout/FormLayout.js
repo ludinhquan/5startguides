@@ -74,7 +74,7 @@ const FormLayout = (props, ref) => {
           label="Tên của Tour ?"
           rules={[getRequiredRule()]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Form.Item name={FIELDS.TOUR_TYPE} label="Loại hình của Tour ?">
           <Radio.Group

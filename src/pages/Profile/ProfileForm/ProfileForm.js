@@ -5,11 +5,11 @@ import { CaretLeftOutlined } from "@ant-design/icons";
 
 import PanelHeader from "./PanelHeader";
 
-import styles from "./ProfileInfo.module.less";
+import styles from "./ProfileForm.module.less";
 
 const { Panel } = Collapse;
 
-const ProfileInfo = (props) => {
+const ProfileForm = (props) => {
   const { title, fields } = props;
   return (
     <div className={styles.container}>
@@ -43,10 +43,10 @@ const ProfileInfo = (props) => {
   );
 };
 
-ProfileInfo.propTypes = {
+ProfileForm.propTypes = {
   form: PropTypes.element,
 };
 
-ProfileInfo.defaultProps = {};
+ProfileForm.defaultProps = {};
 
-export default ProfileInfo;
+export default ProfileForm;

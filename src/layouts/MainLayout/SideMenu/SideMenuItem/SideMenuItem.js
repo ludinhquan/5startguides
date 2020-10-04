@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 
@@ -25,7 +26,7 @@ const SideMenuItem = ({ to, icon, text, badge, border }) => {
     >
       {icon}
       <div
-        className={styles.text}
+        className={cx(styles.text, isActive ? styles.active : null)}
         style={border ? customStyles.borderStyles : null}
       >
         <span>{text}</span>

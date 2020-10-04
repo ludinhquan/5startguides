@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { profileSelector } from "@/store/selectors/user";
 import { formatDateTime, formatVietnamesePhone } from "@/utils/format";
 
-import ProfileInfo from "./ProfileInfo";
-import UserNameForm from "./ProfileInfo/UserNameForm";
-import DefaultForm from "./ProfileInfo/DefaultForm";
+import ProfileInfo from "./ProfileForm";
+import FormItem from "./ProfileForm/FormItem";
+import UserNameForm from "./ProfileForm/UserNameForm";
 
 import styles from "./Profile.module.less";
 import {
@@ -17,6 +17,7 @@ import {
   getRequiredRule,
 } from "@/utils/formRules";
 import { updateProfileRequest } from "@/store/slices/user";
+import TextArea from "antd/lib/input/TextArea";
 
 export const FIELDS = {
   USER_NAME: "userName",
@@ -59,8 +60,8 @@ const Profile = () => {
     ).finally(() => setIsLoading(false));
   };
 
-  const ButtonSubmit = (
-    <Button htmlType="submit" loading={isLoading}>
+  const buttonSubmit = (
+    <Button type="primary" htmlType="submit" loading={isLoading}>
       Lưu lại
     </Button>
   );
@@ -85,18 +86,19 @@ const Profile = () => {
             field: FIELDS.USER_NAME,
             text: "Họ tên",
             value: getUserName(),
-            form: <UserNameForm ButtonSubmit={ButtonSubmit} />,
+            form: <UserNameForm buttonSubmit={buttonSubmit} />,
           },
           {
             field: FIELDS.DATE_OF_BIRTH,
             text: "Ngày, tháng, năm sinh",
             value: profile[FIELDS.DATE_OF_BIRTH],
             form: (
-              <DefaultForm
+              <FormItem
+                labelCol={{ span: 10 }}
                 label="Nhập ngày tháng năm sinh"
                 name={FIELDS.DATE_OF_BIRTH}
-                ButtonSubmit={ButtonSubmit}
-                input={
+                buttonSubmit={buttonSubmit}
+                component={
                   <DatePicker
                     className={styles.datePicker}
                     format="DD/MM/YYYY"
@@ -110,8 +112,8 @@ const Profile = () => {
             text: "Email",
             value: profile[FIELDS.EMAIL],
             form: (
-              <DefaultForm
-                ButtonSubmit={ButtonSubmit}
+              <FormItem
+                buttonSubmit={buttonSubmit}
                 label="Nhập email"
                 name={FIELDS.EMAIL}
                 rules={[getRequiredRule(), getEmailRule()]}
@@ -123,8 +125,9 @@ const Profile = () => {
             text: "Số điện thoại",
             value: formatVietnamesePhone(profile[FIELDS.PHONE_NUMBER]),
             form: (
-              <DefaultForm
-                ButtonSubmit={ButtonSubmit}
+              <FormItem
+                labelCol={{ span: 10 }}
+                buttonSubmit={buttonSubmit}
                 label="Nhập số điện thoại"
                 name={FIELDS.PHONE_NUMBER}
                 rules={[getRequiredRule(), getPhoneNumberRule()]}
@@ -136,8 +139,9 @@ const Profile = () => {
             text: "Số năm kinh nghiệm",
             value: `${profile[FIELDS.YEARS_OF_EXPERIENCE] || 0} năm`,
             form: (
-              <DefaultForm
-                ButtonSubmit={ButtonSubmit}
+              <FormItem
+                labelCol={{ span: 10 }}
+                buttonSubmit={buttonSubmit}
                 label="Số năm kinh ngiệm"
                 name={FIELDS.YEARS_OF_EXPERIENCE}
               />
@@ -148,10 +152,10 @@ const Profile = () => {
             text: "Khu vực phục vụ",
             value: profile[FIELDS.AREA],
             form: (
-              <DefaultForm
+              <FormItem
                 label="Khu vực"
                 name={FIELDS.AREA}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
               />
             ),
           },
@@ -160,10 +164,10 @@ const Profile = () => {
             text: "Loại Tour",
             value: profile[FIELDS.TRIP_TYPE],
             form: (
-              <DefaultForm
+              <FormItem
                 label="Loại Tour"
                 name={FIELDS.TRIP_TYPE}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
               />
             ),
           },
@@ -172,10 +176,12 @@ const Profile = () => {
             text: "Chuyên môn về tour",
             value: profile[FIELDS.TOUR_REGULAR],
             form: (
-              <DefaultForm
+              <FormItem
+                formLayout={{ span: 20 }}
                 label="Chuyên môn"
                 name={FIELDS.TOUR_REGULAR}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
+                component={<TextArea rows={2} />}
               />
             ),
           },
@@ -190,10 +196,10 @@ const Profile = () => {
             text: "Chi phí mỗi giờ",
             value: profile[FIELDS.FEE],
             form: (
-              <DefaultForm
+              <FormItem
                 label="Nhập chi phí"
                 name={FIELDS.FEE}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
               />
             ),
           },
@@ -202,10 +208,12 @@ const Profile = () => {
             text: "Full Australian Driver Licence",
             value: profile[FIELDS.LICENCE],
             form: (
-              <DefaultForm
+              <FormItem
+                labelCol={{ span: 10 }}
+                formLayout={{ span: 20 }}
                 label="Full Australian Driver Licence"
                 name={FIELDS.LICENCE}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
               />
             ),
           },
@@ -215,10 +223,12 @@ const Profile = () => {
             text: "Valid Police Clearance",
             value: profile[FIELDS.CLEARANCE],
             form: (
-              <DefaultForm
+              <FormItem
+                labelCol={{ span: 10 }}
+                formLayout={{ span: 20 }}
                 label="Valid Police Clearance"
                 name={FIELDS.CLEARANCE}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
               />
             ),
           },
@@ -228,10 +238,12 @@ const Profile = () => {
             text: "Valid Working with Children",
             value: profile[FIELDS.VALID_WORKING_WITH_CHILDREN],
             form: (
-              <DefaultForm
+              <FormItem
+                labelCol={{ span: 10 }}
+                formLayout={{ span: 20 }}
                 label="Valid Working with Children"
                 name={FIELDS.VALID_WORKING_WITH_CHILDREN}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
               />
             ),
           },
@@ -241,10 +253,12 @@ const Profile = () => {
             text: "Valid Firstaid Certificate",
             value: profile[FIELDS.TRIP_TYPE],
             form: (
-              <DefaultForm
+              <FormItem
+                labelCol={{ span: 10 }}
+                formLayout={{ span: 20 }}
                 label="Valid Firstaid Certificate"
                 name={FIELDS.TRIP_TYPE}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
               />
             ),
           },
@@ -253,10 +267,12 @@ const Profile = () => {
             text: "Self Intro",
             value: profile[FIELDS.SELF_INTRO],
             form: (
-              <DefaultForm
+              <FormItem
+                formLayout={{ span: 20 }}
                 label="Self Intro"
                 name={FIELDS.SELF_INTRO}
-                ButtonSubmit={ButtonSubmit}
+                buttonSubmit={buttonSubmit}
+                component={<TextArea row={3} />}
               />
             ),
           },

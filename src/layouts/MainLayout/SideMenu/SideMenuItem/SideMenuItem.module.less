@@ -10,7 +10,7 @@
   height: 48px;
   border-radius: 8px;
   padding: 0 16px;
-
+  
   .text {
     width: 100%;
     height: 100%;
@@ -18,8 +18,13 @@
     justify-content: space-between;
     align-items: center;
     margin-left: 24px;
-    font-weight: 500;
     font-size: 14px;
+    font-weight: 400;
+    
+    &.active, &:hover {
+      font-weight: 500;
+    }
+
     .badge {
       display: flex;
       justify-content: center;

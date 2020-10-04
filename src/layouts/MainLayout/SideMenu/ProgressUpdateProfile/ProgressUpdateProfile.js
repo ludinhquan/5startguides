@@ -31,7 +31,7 @@ function ProgressUpdateProfile() {
           </div>
         </Col>
         <Col span={17}>
-          <div className={styles.helloText}>Xin chào, {profile?.lastName}</div>
+          <div className={styles.helloText}>Xin chào, {profile?.lastName}!</div>
           <div>
             Bạn đã hoàn thành <b>75%</b> hồ sơ,
           </div>
