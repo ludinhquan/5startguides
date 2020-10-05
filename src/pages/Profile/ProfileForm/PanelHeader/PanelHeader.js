@@ -7,7 +7,7 @@ import styles from "./PanelHeader.module.less";
 
 const PanelHeader = ({ field, value, isVerify }) => {
   return (
-    <Row align="middle" className={styles.container}>
+    <Row align="middle" justify="space-between" className={styles.container}>
       <Col className={styles.field} md={8}>
         <CheckCircleOutlined
           style={{ fontSize: 25, color: isVerify ? "#2ECC71" : "#BFBFBF" }}

@@ -1,10 +1,32 @@
 .container {
   padding: 32px;
+  @media (max-width: @mobile) {
+    padding: 20px;
+  }
   .title {
     color: #9b9b9b;
     margin-top: 24px;
     margin-bottom: 8px;
     font-size: 14px;
     line-height: 22px;
+  }
+}
+
+.drawer {
+  :global(.ant-drawer-content-wrapper) {
+    width: 300px !important;
+  }
+}
+
+.sider {
+  background-color: #ffffff;
+  :global(.ant-layout-sider-children) {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  &.mobile {
+    width: unset !important;
+    min-width: unset !important;
+    max-width: unset !important;
   }
 }

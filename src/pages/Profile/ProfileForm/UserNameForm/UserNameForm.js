@@ -1,15 +1,20 @@
 import React from "react";
+import { useMedia } from "react-media";
 import { Col, Form, Input, Row } from "antd";
+
 import { FIELDS } from "@/pages/Profile";
 import { getRequiredRule } from "@/utils/formRules";
 
 const UserNameForm = (props) => {
   const { buttonSubmit } = props;
 
+  const isMobile = useMedia({ query: "(max-width: 1033px)" });
+  const customFormLayout = isMobile ? { span: 24 } : { span: 16 };
+
   return (
     <>
       <Row justify="center">
-        <Col span={16}>
+        <Col {...customFormLayout}>
           <Form.Item
             colon={false}
             required={false}

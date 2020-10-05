@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import { Link } from "react-router-dom";
 import {
   Badge,
@@ -15,6 +16,8 @@ import {
   BellOutlined,
   CaretDownOutlined,
   MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 
@@ -23,7 +26,72 @@ import avatar from "@/assets/images/avatar.png";
 
 import styles from "./Header.module.less";
 
-const Header = (props) => {
+const HeaderMobile = ({ isMobile, isCollapsed, setIsCollapsed }) => (
+  <Layout.Header className={cx(styles.container, styles.mobile)}>
+    <Row justify="space-between" align="middle">
+      <Col>
+        {React.createElement(
+          isCollapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+          {
+            className: styles.collapseTrigger,
+            onClick: () => {
+              setIsCollapsed((prevState) => !prevState);
+            },
+          }
+        )}
+      </Col>
+      <Col className={styles.brand}>
+        <Input
+          size={isMobile ? "small" : "large"}
+          className={styles.search}
+          placeholder="Bất cứ đâu - Trải nghiệm"
+          prefix={<SearchOutlined />}
+        />
+      </Col>
+      <Col>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key="1">
+                Khám phá <CaretDownOutlined />
+              </Menu.Item>
+              <Menu.Item key="2">Về chúng tôi</Menu.Item>
+              <Menu.Item key="3">Blog</Menu.Item>
+              <Menu.Item key="3">
+                <Row justify="space-around">
+                  <Col>
+                    <Badge count={5} size="small">
+                      <Button
+                        className={styles.icon}
+                        icon={<MailOutlined />}
+                        shape="circle"
+                        size="small"
+                      />
+                    </Badge>
+                  </Col>
+                  <Col>
+                    <Badge count={3} size="small">
+                      <Button
+                        className={styles.icon}
+                        icon={<BellOutlined />}
+                        shape="circle"
+                        size="small"
+                      />
+                    </Badge>
+                  </Col>
+                </Row>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <Avatar className={styles.imageAvatar} size="large" src={avatar} />
+        </Dropdown>
+      </Col>
+    </Row>
+  </Layout.Header>
+);
+
+const HeaderDesktop = () => {
   return (
     <Layout.Header className={styles.container}>
       <Row justify="space-between">
@@ -99,4 +167,9 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default ({ isMobile, isCollapsed, setIsCollapsed }) =>
+  isMobile ? (
+    <HeaderMobile isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+  ) : (
+    <HeaderDesktop />
+  );

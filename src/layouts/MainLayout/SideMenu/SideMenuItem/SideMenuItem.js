@@ -14,13 +14,14 @@ const customStyles = {
   active: { background: "#f5f5f5" },
 };
 
-const SideMenuItem = ({ to, icon, text, badge, border }) => {
+const SideMenuItem = ({ to, icon, text, badge, border, onClick }) => {
   const location = useLocation();
   const { pathname } = location;
   const isActive = pathname === to;
   return (
     <Link
       to={to}
+      onClick={onClick}
       className={styles.sideItem}
       style={isActive ? customStyles.active : null}
     >

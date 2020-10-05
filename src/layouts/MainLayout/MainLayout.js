@@ -1,12 +1,13 @@
-import React, { Suspense } from "react";
 import { Layout, Spin } from "antd";
+import { useMedia } from "react-media";
+import React, { Suspense, useState } from "react";
 
 import Header from "./Header";
 import SideMenu from "./SideMenu";
 
 import styles from "./MainLayout.module.less";
 
-const { Content, Sider } = Layout;
+const { Content } = Layout;
 
 const Loading = () => (
   <div className={styles.loading}>
@@ -15,13 +16,22 @@ const Loading = () => (
 );
 
 const MainLayout = ({ children }) => {
+  const isMobile = useMedia({ query: "(max-width: 1033px)" });
+  const [isCollapsed, setIsCollapsed] = useState(isMobile);
+
   return (
     <Layout className={styles.container}>
-      <Header />
+      <Header
+        isCollapsed={isCollapsed}
+        isMobile={isMobile}
+        setIsCollapsed={setIsCollapsed}
+      />
       <Layout>
-        <Sider width={368} className={styles.sider}>
-          <SideMenu />
-        </Sider>
+        <SideMenu
+          isCollapsed={isCollapsed}
+          isMobile={isMobile}
+          setIsCollapsed={setIsCollapsed}
+        />
         <Content className={styles.content}>
           <Suspense fallback={<Loading />}>{children}</Suspense>
         </Content>

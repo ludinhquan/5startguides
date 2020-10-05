@@ -1,6 +1,14 @@
-.title {
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 38px;
-  margin-bottom: 32px;
+.container {
+  @media (max-width: @mobile) {
+    padding: 20px;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 38px;
+    margin-bottom: 32px;
+    @media (max-width: @mobile) {
+      text-align: center;
+    }
+  }
 }

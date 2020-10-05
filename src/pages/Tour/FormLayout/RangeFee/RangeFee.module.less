@@ -1,10 +1,6 @@
 .container {
-  .title {
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 38px;
-    margin-bottom: 32px;
-  }
+  display: flex;
+  justify-content: space-between;
   :global(.ant-slider) {
     :global(.ant-tooltip-arrow) {
       display: none;
@@ -13,7 +9,7 @@
       padding-bottom: 0;
     }
     :global(.ant-tooltip-inner) {
-      background-color: unset;
+      background-color: #ffffff;
       box-shadow: unset;
       color: #000000;
       font-weight: 600;
@@ -26,6 +22,11 @@
       font-size: 14px;
       color: #bfbfbf;
       white-space: nowrap;
+    }
+  }
+  @media (max-width: @mobile) {
+    .text {
+      margin-bottom: 30px;
     }
   }
 }

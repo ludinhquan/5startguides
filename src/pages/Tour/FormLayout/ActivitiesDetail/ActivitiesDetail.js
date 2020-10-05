@@ -13,8 +13,8 @@ const Detail = (props) => {
   return (
     <>
       <div className={styles.label}>Hoạt động ngày {fieldKey + 1}</div>
-      <Row>
-        <Col span={2}>
+      <Row gutter={30} className={styles.detail}>
+        <Col xs={5} md={2}>
           <Form.Item
             {...props}
             noStyle
@@ -25,7 +25,7 @@ const Detail = (props) => {
           </Form.Item>
           <div className={styles.subText}>Hình ảnh minh họa</div>
         </Col>
-        <Col span={22}>
+        <Col xs={19} md={22}>
           <Form.Item name={[name, "title"]} fieldKey={[fieldKey, "title"]}>
             <Input autoFocus />
           </Form.Item>
@@ -52,7 +52,12 @@ const ActivitiesDetail = (props) => {
               <Detail key={field.key} {...field} />
             ))}
             <Row justify="center">
-              <Col span={4} onClick={() => add()} className={styles.btnAddRow}>
+              <Col
+                xs={24}
+                md={4}
+                onClick={() => add()}
+                className={styles.btnAddRow}
+              >
                 <PlusOutlined /> Thêm hoạt động
               </Col>
             </Row>

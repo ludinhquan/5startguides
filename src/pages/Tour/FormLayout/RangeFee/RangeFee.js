@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Col, Row, Slider } from "antd";
 
+import styles from "./RangeFee.module.less";
+
 const RangeFee = (props) => {
   const { value, onChange: onUpdateForm } = props;
 
   return (
-    <Row justify="space-between">
-      <Col>Chi phí mỗi giờ dành cho 1 người</Col>
-      <Col span={12}>
+    <Row className={styles.container}>
+      <Col className={styles.text}>Chi phí mỗi giờ dành cho 1 người</Col>
+      <Col xs={24} md={12}>
         <Slider
           range
           step={1}
